@@ -6,8 +6,5 @@ Feature: Test Scenarios for Search functionality
     When Click on right and left arrows
     And Click bottom dots
     #Then Top banners are shown
-
-    #When Input Dress into search field
-    #And Click on search icon
-    #Then Product results for Dress are shown
-    #And First result contains Dress
+    #When Click on click on product banner
+    #Then Correct category page is displayed
