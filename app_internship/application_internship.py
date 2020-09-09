@@ -4,6 +4,7 @@ from pages_internship.search_return_page import SearchResultsInternship
 from pages_internship.prod_page import Product_Internship
 from pages_internship.top_banner import TopBanner
 from pages_internship.cart_func import CartServices
+from pages_internship.page_section import PageSection
 
 
 class Application_Internship:
@@ -17,4 +18,5 @@ class Application_Internship:
         self.search_return_page = SearchResultsInternship(self.driver)
         self.prod_page = Product_Internship(self.driver)
         self.cart_func = CartServices(self.driver)
+        self.page_section = PageSection(self.driver)
 
