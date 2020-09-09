@@ -1,28 +1,21 @@
 Feature: Test Scenarios for Home Page functionality
 
 @smoke
-Scenario: User can click right and left arrows to see top banners
+Scenario: User can browse Product Categories
   Given Open Home page
-  When Click on right and left arrows
-  Then Top banners are shown
-
-@smoke
-Scenario:User can click bottom dots to see top banners
+  When Browse Our Categories text is shown
+  #Then 4 Product Categories can be browse
+  #When Click on Product Category
+  #Then Product category page is displayed
   Given Open Home page
-  When Click bottom dots
-  Then Top banners are shown
-
-@smoke
-Scenario: User can click on product banner and is taken to correct category page
-  Given Open Home page
-  When Click on Product01 banner
-  Then Product01 category page is displayed
-  Given Open Home page
-  When Click on Product02 banner
-  Then Product02 category page is displayed
+  When Latest Products on Sale text is shown
+  #Every product has Sale icon, image, product category, name, price, and star-rating
+  #User can click on heart icon to add to wishlist
+  #User can open product from Sale and add it to cart
+  #User can open product from Sale and see product price and description
+  #User can open and close Quick View by clicking on closing X
+  #User can click Quick View and add product to cart
+  #User can click Quick View and click through product images
 
 
-#"Browse Our Categories" text is shown
-#4 correct categories are shown
-#Upon clicking on each category, correct page opens
 
