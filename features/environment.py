@@ -2,7 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from app_internship.application_internship import Application_Internship
-from features.logger import logger
+from logger import logger
+
 import datetime
 
 now = datetime.datetime.now()

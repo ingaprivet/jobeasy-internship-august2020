@@ -5,10 +5,6 @@ from pages_internship.prod_page import Product_Internship
 from pages_internship.top_banner import TopBanner
 from pages_internship.cart_func import CartServices
 
-# from pages_internship.sign_in_services import SignInServices
-# from pages_internship.hamburger_menu_services import HamburgerMenuServices
-
-
 
 class Application_Internship:
     print(f'in Application_Internship')
@@ -22,6 +18,3 @@ class Application_Internship:
         self.prod_page = Product_Internship(self.driver)
         self.cart_func = CartServices(self.driver)
 
-
-        # self.sign_in_services = SignInServices(self.driver)
-        # self.hamburger_menu_services = HamburgerMenuServices(self.driver)
