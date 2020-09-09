@@ -82,7 +82,7 @@ venv.bak/
 # logs
 *.log
 
-# app files
+# app_internship files
 app_binaries/
 *.apk
 *.app

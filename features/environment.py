@@ -1,19 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
-from app.application import Application
+from app_internship.application_internship import Application_Internship
 from features.logger import logger
-
 import datetime
 
 now = datetime.datetime.now()
-#print(f'Current date and time : ' + now.strftime("%Y-%m-%d %H:%M:%S"))
+# print(f'Current date and time : ' + now.strftime("%Y-%m-%d %H:%M:%S"))
 bs_user = 'ingabukhvalova1'
 bs_pw = 'T6ChdbMGku9CL7mMzxp5'
 
 
-#def browser_init(context, name):
-    #:param context: Behave context
+# def browser_init(context, name):
+#:param context: Behave context
 
 def browser_init(context, name):
     context.driver = webdriver.Chrome(
@@ -66,7 +65,7 @@ def browser_init(context, name):
         'autoGrantPermissions': 'true'
     }'''
     ###End for Appium!!! '''
-    #  'app' => 'my-app-name'
+    #  'app_internship' => 'my-app_internship-name'
 
     ### Code for Browser Stack URL
     # BROWSERSTACK_URL = 'https://ingabukhvalova1:T6ChdbMGku9CL7mMzxp5@hub-cloud.browserstack.com/wd/hub'
@@ -82,7 +81,7 @@ def browser_init(context, name):
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
-    context.app = Application(context.driver)
+    context.app_internship = Application_Internship(context.driver)
     context.driver.wait = WebDriverWait(context.driver, 10)
 
 
@@ -95,6 +94,8 @@ def open_new_tab(context, link):
         # sleep(0.5)
         context.driver.wait(0, 5)
     context.driver.switch_to.window(context.driver.window_handles[-1])
+
+
 # my code
 
 def before_scenario(context, scenario):
@@ -114,4 +115,3 @@ def after_step(context, step):
 def after_scenario(context, feature):
     context.driver.delete_all_cookies()
     context.driver.quit()
-
