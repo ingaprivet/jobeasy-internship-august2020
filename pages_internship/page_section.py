@@ -1,16 +1,24 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages_internship.base_page import Page_Internship
 from selenium.webdriver.common.by import By
 import time
-index.lockgit
+
 
 class PageSection(Page_Internship):
     BROWSE_CAT_TEXT = (By.XPATH, "//span[contains(text(),'Browse our Categories')]")
     LATEST_SALE_TEXT = (By.XPATH, "//span[contains(text(),'Latest products on sale')]")
+    PAGE_TEXT_CURRENT = (By.CSS_SELECTOR, "nav.woocommerce-breadcrumb.breadcrumbs.uppercase")
+    PRODUCT_CATEGORIES = (By.XPATH, "//*[contains(@class, 'col-inner')]//*[contains(@href, 'product-category')]")
+    CALC_CATEGORIES = (By.XPATH, "div.flickity-slider div.product-category.col.is-selected")
 
     def verify_current_section(self):
+
         print("Perform your verification on page {}".format(self.driver.title))
+
         current_section_text = (self.find_element(*self.BROWSE_CAT_TEXT)).text
         current_section_text01 = (self.find_element(*self.LATEST_SALE_TEXT)).text
 
@@ -21,3 +29,63 @@ class PageSection(Page_Internship):
             self.verify_text(current_section_text01, *self.LATEST_SALE_TEXT)
         elif current_section_text01 is None:
             self.verify_text(current_section_text, *self.BROWSE_CAT_TEXT)
+
+    def category_shown_quantity(self, cat_quantity):
+        hover_ul = self.find_elements(*self.PRODUCT_CATEGORIES)
+        quantity_of_product_categories = 0
+
+        for i in hover_ul:
+            # hover over all items one by one
+            ActionChains(self.driver).move_to_element(i).perform()
+            quantity_of_product_categories += 1
+
+        print("Perform your verification on page {}".format(self.driver.title))
+        assert str(cat_quantity) in str(
+            quantity_of_product_categories), f'Expected {cat_quantity} to be in {quantity_of_product_categories}'
+        print(f'Expected product category quantity: ' + str(cat_quantity) + f' is in the actual quantity: ' + str(
+            quantity_of_product_categories))
+
+    def hover_and_show(self):
+
+        hover_cat_block = self.find_elements(*self.PRODUCT_CATEGORIES)
+        time.sleep(2)
+
+        windows_before = self.driver.current_window_handle  # Store the parent_window_handle for future use
+
+        array_of_links = []
+        array_of_text = []
+
+        index = 0
+
+        for link in hover_cat_block:
+            link_info = link.get_attribute("href")
+            array_of_links.append(link_info)
+            text_info = link.get_attribute("innerText")
+            array_of_text.append(text_info)
+
+        for link in hover_cat_block:
+            url_link = array_of_links[index]  # url from the saved array
+            text_info_default = array_of_text[index]
+
+            self.driver.execute_script(
+                "window.open('" + url_link + "');")  # Open the hrefs one by one through execute_script method in a new tab
+            WebDriverWait(self.driver, 10).until(
+                EC.number_of_windows_to_be(2))  # Induce  WebDriverWait for the number_of_windows_to_be 2
+
+            windows_after = self.driver.window_handles  # list
+
+            for x in windows_after:
+
+                if x != windows_before:
+                    self.driver.switch_to.window(x)  # switch_to the new window
+                    windows_new = self.driver.current_url
+                    print("Perform your verification on page {}".format(self.driver.title))
+                    assert url_link == windows_new, f'Expected {windows_new} url address, but got {url_link} url address'
+                    print(f'Expected url: ' + url_link + f' is in the actual url: ' + windows_new)
+                    time.sleep(3)
+
+            self.driver.close()  # close the window
+            self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handle
+            time.sleep(2)
+
+            index += 1

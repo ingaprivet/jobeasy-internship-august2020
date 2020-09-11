@@ -21,3 +21,5 @@ class SearchResultsInternship(Page_Internship):
         assert empty_result in search_result_empty, f'Incorrect header: {search_result_empty}'
 
 
+
+

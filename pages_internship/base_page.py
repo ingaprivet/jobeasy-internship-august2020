@@ -39,8 +39,9 @@ class Page_Internship:
         self.driver.wait.until(EC.presence_of_element_located(locator))
 
     def verify_text(self, expected_text: str, *locator):
-        print(f'in verify_text of base_page')
+        #print(f'in verify_text of base_page')
         actual_text = self.driver.find_element(*locator).text
+        #print(f'actual_text = ', actual_text)
         assert expected_text in actual_text, f'Expected text {expected_text}, but got {actual_text}'
         print(f'Expected text: ' + expected_text + f' is in the actual text: ' + actual_text)
 
