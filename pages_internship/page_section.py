@@ -20,6 +20,10 @@ class PageSection(Page_Internship):
     PRODUCT_CATEGORIES = (By.XPATH, "//*[contains(@class, 'col-inner')]//*[contains(@href, 'product-category')]")
     CALC_CATEGORIES = (By.XPATH, "div.flickity-slider div.product-category.col.is-selected")
     TOP_LINK = (By.ID, "top-link")
+    # FOOTER_LINKS_BLOCK = (By.CSS_SELECTOR, "ul#menu-main-1.links.footer-nav.uppercase")
+
+    FOOTER_LINKS_BLOCK = (By.CSS_SELECTOR,
+                          "div.container.clearfix li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children a")
 
     def verify_current_section(self):
 
@@ -105,3 +109,45 @@ class PageSection(Page_Internship):
     def verify_copy(self, footer_copy):
         print("Perform your verification on page {}".format(self.driver.title))
         self.verify_text(footer_copy, *self.COPYRIGHT_FOOTER)
+
+    def hover_click_top_links(self):
+        print("Perform your verification on page {}".format(self.driver.title))
+        footer_links_block = self.find_elements(*self.FOOTER_LINKS_BLOCK)
+        windows_before = self.driver.current_window_handle  # Store the parent_window_handle for future use
+        array_of_links = []
+        index = 0
+
+        for link in footer_links_block:
+            link_info = link.get_attribute("href")
+            array_of_links.append(link_info)
+
+        for link in footer_links_block:
+            url_link = array_of_links[index]  # url from the saved array
+
+            self.driver.execute_script(
+                "window.open('" + url_link + "');")  # Open the hrefs one by one through execute_script method in a new tab
+            WebDriverWait(self.driver, 15).until(
+                EC.number_of_windows_to_be(2))  # Induce  WebDriverWait for the number_of_windows_to_be 2
+
+            windows_after = self.driver.window_handles  # list
+
+            for x in windows_after:
+
+                if x != windows_before:
+                    self.driver.switch_to.window(x)  # switch_to the new window
+                    windows_new = self.driver.current_url
+                    print("Perform your verification on page {}".format(self.driver.title))
+                    assert url_link in windows_new, f'Expected text {url_link}, but got {windows_new}'
+
+                    print(f'Expected url: ' + url_link + f' is in the actual url: ' + windows_new)
+
+            self.driver.close()  # close the window
+            self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handle
+
+            index += 1
+
+    def hover_click_top_link(self):
+        top_link = self.find_element(*self.TOP_LINK)
+        ActionChains(self.driver).move_to_element(top_link).click().perform()
+        time.sleep(5)
+

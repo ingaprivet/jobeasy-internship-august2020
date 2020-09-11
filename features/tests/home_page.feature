@@ -1,5 +1,7 @@
 Feature: Test Scenarios for Home Page functionality
 
+Feature: Test Scenarios for Home Page functionality
+
 @smoke
 Scenario: User can click right and left arrows to see top banners
   Given Open Home page
@@ -32,9 +34,9 @@ Scenario: User can browse Product Categories
 Scenario: Footer functionality
   Given Open Home page
   When Footer shows Best Selling, Latest, Top Rated categories
-  #Then All products in the footer have price, name, star-rating
+  # ???Then All products in the footer have price, name, star-rating
   Then Copyright 2020 shown in footer
-  #And Footer has button to go back to top
-  #And Footer has working links to all product categories
-
+  And Footer has working links to all product categories
+  When Click on Footer top link
+  Then Verify Top of Home Page shown
 

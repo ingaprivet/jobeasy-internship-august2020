@@ -29,3 +29,19 @@ def verify_footer_section(context, footer_cat01, footer_cat02, footer_cat03):
 @then('{footer_copy} shown in footer')
 def verify_copy(context, footer_copy):
     context.app_internship.page_section.verify_copy(footer_copy)
+
+
+@when('Click on Footer top link')
+def hover_click_top_link(context):
+    context.app_internship.page_section.hover_click_top_link()
+
+
+@then('Verify Top of Home Page shown')
+# use GetTop logo to identify Top of Home Page
+def logo_present(context):
+    context.app_internship.top_menu.logo_present()
+
+
+@then('Footer has working links to all product categories')
+def hover_click_top_links(context):
+    context.app_internship.page_section.hover_click_top_links()
