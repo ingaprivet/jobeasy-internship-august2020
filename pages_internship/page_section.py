@@ -11,9 +11,15 @@ import time
 class PageSection(Page_Internship):
     BROWSE_CAT_TEXT = (By.XPATH, "//span[contains(text(),'Browse our Categories')]")
     LATEST_SALE_TEXT = (By.XPATH, "//span[contains(text(),'Latest products on sale')]")
+    BEST_SELLING_FOOTER = (By.XPATH, "//span[contains(text(),'Best Selling')]")
+    LATEST_FOOTER = (By.XPATH, "//span[contains(text(),'Latest')]")
+    TOP_RATED_FOOTER = (By.XPATH, "//span[contains(text(),'Top Rated')]")
+    COPYRIGHT_FOOTER = (By.CSS_SELECTOR, "div.copyright-footer")
+
     PAGE_TEXT_CURRENT = (By.CSS_SELECTOR, "nav.woocommerce-breadcrumb.breadcrumbs.uppercase")
     PRODUCT_CATEGORIES = (By.XPATH, "//*[contains(@class, 'col-inner')]//*[contains(@href, 'product-category')]")
     CALC_CATEGORIES = (By.XPATH, "div.flickity-slider div.product-category.col.is-selected")
+    TOP_LINK = (By.ID, "top-link")
 
     def verify_current_section(self):
 
@@ -89,3 +95,13 @@ class PageSection(Page_Internship):
             time.sleep(2)
 
             index += 1
+
+    def verify_footer_section(self, footer_cat01, footer_cat02, footer_cat03):
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.verify_text(footer_cat01.upper(), *self.BEST_SELLING_FOOTER)
+        self.verify_text(footer_cat02.upper(), *self.LATEST_FOOTER)
+        self.verify_text(footer_cat03.upper(), *self.TOP_RATED_FOOTER)
+
+    def verify_copy(self, footer_copy):
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.verify_text(footer_copy, *self.COPYRIGHT_FOOTER)

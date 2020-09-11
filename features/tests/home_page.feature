@@ -28,7 +28,13 @@ Scenario: User can browse Product Categories
   And  4 Product Categories are shown
   Then User can Click on Product Category and Product category page is displayed
 
-
-
+@smoke
+Scenario: Footer functionality
+  Given Open Home page
+  When Footer shows Best Selling, Latest, Top Rated categories
+  #Then All products in the footer have price, name, star-rating
+  Then Copyright 2020 shown in footer
+  #And Footer has button to go back to top
+  #And Footer has working links to all product categories
 
 
