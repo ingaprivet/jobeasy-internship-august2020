@@ -1,6 +1,5 @@
 Feature: Test Scenarios for Home Page functionality
 
-Feature: Test Scenarios for Home Page functionality
 
 @smoke
 Scenario: User can click right and left arrows to see top banners

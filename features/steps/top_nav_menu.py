@@ -51,9 +51,9 @@ def verify_found_results_text(context, search_text):
     context.app_internship.cart_func.verify_found_results_text(search_text)
 
 
-@given('Open a Product page')
-def open_amazon(context):
-    context.driver.get('https://gettop.us/product/airpods/')
+#@given('Open a Product page')
+#def open_amazon(context):
+#    context.driver.get('https://gettop.us/product/airpods/')
 
 
 @when('Click on Add to Cart button')

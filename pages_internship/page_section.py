@@ -25,6 +25,8 @@ class PageSection(Page_Internship):
     FOOTER_LINKS_BLOCK = (By.CSS_SELECTOR,
                           "div.container.clearfix li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children a")
 
+    TAB_DESCRIPTION = (By.CSS_SELECTOR, "li.description_tab.active" )
+
     def verify_current_section(self):
 
         print("Perform your verification on page {}".format(self.driver.title))
@@ -150,4 +152,9 @@ class PageSection(Page_Internship):
         top_link = self.find_element(*self.TOP_LINK)
         ActionChains(self.driver).move_to_element(top_link).click().perform()
         time.sleep(5)
+
+    def verify_product_description_section(self, description_section):
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.verify_text(description_section.upper(), *self.TAB_DESCRIPTION)
+
 

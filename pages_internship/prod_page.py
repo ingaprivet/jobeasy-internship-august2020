@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages_internship.base_page import Page_Internship
 from selenium.webdriver import ActionChains
-
+from selenium.common.exceptions import NoSuchElementException
 
 class Product_Internship(Page_Internship):
     print(f'in Product_Internship(Page_Internship)')
@@ -9,6 +9,32 @@ class Product_Internship(Page_Internship):
         By.CSS_SELECTOR, "li.header-search.header-search-dropdown.has-icon.has-dropdown.menu-item-has-children")
     SEARCH_TOOLTIP = (By.ID, 'woocommerce-product-search-field-0')
     SEARCH_SUBMIT = (By.XPATH, "//*[contains(@class, 'ux-search-submit')]")
+
+    MINUS_BUTTON = (By.CSS_SELECTOR, "input.minus.button.is-form")
+    PLUS_BUTTON = (By.CSS_SELECTOR, "input.plus.button.is-form")
+    ADD_BUTTON = (By.NAME, "add-to-cart")
+    CHECKOUT_BUTTON = (By.CSS_SELECTOR, "a.button.checkout.wc-forward")
+
+
+    ITEMS_AMOUNT_ON_PAGE = (By.XPATH, "//*[@title='Qty']")
+    ITEMS_AMOUNT_IN_CART = (By.CSS_SELECTOR, "span.cart-icon.image-icon strong")
+    ITEM_ADDED_MESSAGE = (By.CSS_SELECTOR, "div.message-container.container.success-color.medium-text-center")
+    OUT_OF_STOCK_MESSAGE = (By.CSS_SELECTOR, "p.stock.out-of-stock")
+    UMAYLIKE_WIDGET = (By.CSS_SELECTOR, "h3.widget-title.shop-sidebar")
+
+    SUGGESTED_PRODUCT_AVAILABLE = (By.CSS_SELECTOR, "aside span.product-title")
+# tab-title-description\
+
+
+
+    def open_prod_page(self, product_id):
+        self.open_page(f'dp/product/{product_id}')
+
+    def click_plus_button(self):
+        self.click(*self.PLUS_BUTTON)
+
+    def click_minus_button(self):
+        self.click(*self.MINUS_BUTTON)
 
     # @When Hoover over magni icon
     def hover_magni_icon(self):
@@ -31,3 +57,69 @@ class Product_Internship(Page_Internship):
 
     # @Product results for Watch Series 5 are shown
     # will grab from class SearchResultsInternship(Page_Internship)
+
+
+    def verify_size_tooltip(self):
+        self.wait_for_element_appear(*self.SIZE_SELECTION_TOOLTIP)
+
+    def verify_deals_shown(self):
+        self.wait_for_element_appear(*self.DEALS_BLOCK)
+
+    def verify_item_added_message_shown(self, item_added_message_passed):
+        item_added_message_shown = (self.find_element(*self.ITEM_ADDED_MESSAGE)).get_attribute("innerText")
+        print("Perform your verification on page {}".format(self.driver.title))
+        assert item_added_message_passed in item_added_message_shown, f'Expected text {item_added_message_passed}, ' \
+                                                                      f'but got {item_added_message_shown} '
+
+        print(f'Expected text: ' + item_added_message_passed +
+              f' is in the actual cart product title: ' + item_added_message_shown)
+
+    def hover_back_forwar_arrows(self):
+        arrow_icon = self.find_element(*self.SEARCH_INPUT)
+        ActionChains(self.driver).move_to_element(arrow_icon).perform()
+
+    def verify_outofstock_message_shown(self, out_of_stock_message_passed):
+        out_of_stock_message_shown = (self.find_element(*self.OUT_OF_STOCK_MESSAGE)).get_attribute("innerText")
+
+        print("Perform your verification on page {}".format(self.driver.title))
+        assert out_of_stock_message_passed in out_of_stock_message_shown, f'Expected text {out_of_stock_message_passed}, ' \
+                                                                      f'but got {out_of_stock_message_shown} '
+
+        print(f'Expected text: ' + out_of_stock_message_passed +
+              f' is in the actual cart product title: ' + out_of_stock_message_shown)
+
+    def verify_add_button_available(self):
+        print("Perform your verification on page {}".format(self.driver.title))
+        try:
+            self.find_element(*self.ADD_BUTTON).text
+
+        except NoSuchElementException:
+            print(f'Will handle NoSuchElementException')
+            print(f'Add to Cart button is not shown to the user')
+
+    def verify_checkout_button_available(self):
+        print("Perform your verification on page {}".format(self.driver.title))
+        try:
+            self.find_element(*self.CHECKOUT_BUTTON)
+
+        except NoSuchElementException:
+            print(f'Will handle NoSuchElementException')
+            print(f'Checkout button is not shown to the user')
+
+    def verify_umaylike_widget_text(self, umaylike_widget_text_passed):
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.verify_text(umaylike_widget_text_passed, *self.UMAYLIKE_WIDGET)
+
+    def verify_suggested_products_shown(self):
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.click(*self.SUGGESTED_PRODUCT_AVAILABLE)
+
+    def verify_correct_page_shown(self):
+        page_expected = (self.find_element(*self.UMAYLIKE_WIDGET)).text
+        print("Perform your verification on page {}".format(self.driver.title))
+        self.verify_text(page_expected, *self.UMAYLIKE_WIDGET)
+
+
+
+
+

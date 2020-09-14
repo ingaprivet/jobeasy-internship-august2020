@@ -34,8 +34,7 @@ class CartServices(Page_Internship):
         self.verify_text(search_text, *self.EMPTY_CART_TEXT)
 
     def click_add_button(self):
-        self.click(*self.ADD_BUTTON)
-        time.sleep(2)
+        self.wait_for_element_click(*self.ADD_BUTTON)
 
     def verify_correct_prod_price_displayed(self):
         print("Perform your verification on page {}".format(self.driver.title))
@@ -45,7 +44,13 @@ class CartServices(Page_Internship):
     def verify_correct_items_amount_displayed(self):
         print("Perform your verification on page {}".format(self.driver.title))
         items_amount_page = (self.find_element(*self.ITEMS_AMOUNT_ON_PAGE)).get_attribute("value")
-        self.verify_text(items_amount_page, *self.ITEMS_AMOUNT_IN_CART)
+        items_amount_in_cart = (self.find_element(*self.ITEMS_AMOUNT_IN_CART)).text
+        assert items_amount_page in items_amount_in_cart, f'Expected text {items_amount_page}, ' \
+                                                          f'but got {items_amount_in_cart}'
+        print(
+            f'Expected amount: ' + items_amount_page + f' is in the actual cart items amount: ' + items_amount_in_cart)
+
+        # self.verify_text(items_amount_page, self.ITEMS_AMOUNT_IN_CART)
 
     def hover_cart_icon(self):
         cart_icon = self.find_element(*self.CART_ICON)
@@ -94,4 +99,9 @@ class CartServices(Page_Internship):
 
         assert int_calculated_subtotal == int_subtotal_cart, f'Expected text {calculated_subtotal}, ' \
                                                              f'but got {subtotal_cart}'
-        print(f'Expected text: ' + subtotal_cart + f' is in the actual cart subtotal: ' + calculated_subtotal)
+        print(f'Expected subtotal: ' + subtotal_cart + f' is in the actual cart subtotal: ' + calculated_subtotal)
+
+    def input_quantity(self, input_quantity):
+        self.input(input_quantity, *self.ITEMS_AMOUNT_ON_PAGE)
+
+
