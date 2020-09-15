@@ -23,7 +23,7 @@ class Product_Internship(Page_Internship):
     UMAYLIKE_WIDGET = (By.CSS_SELECTOR, "h3.widget-title.shop-sidebar")
 
     SUGGESTED_PRODUCT_AVAILABLE = (By.CSS_SELECTOR, "aside span.product-title")
-# tab-title-description\
+
 
 
 
@@ -58,12 +58,6 @@ class Product_Internship(Page_Internship):
     # @Product results for Watch Series 5 are shown
     # will grab from class SearchResultsInternship(Page_Internship)
 
-
-    def verify_size_tooltip(self):
-        self.wait_for_element_appear(*self.SIZE_SELECTION_TOOLTIP)
-
-    def verify_deals_shown(self):
-        self.wait_for_element_appear(*self.DEALS_BLOCK)
 
     def verify_item_added_message_shown(self, item_added_message_passed):
         item_added_message_shown = (self.find_element(*self.ITEM_ADDED_MESSAGE)).get_attribute("innerText")

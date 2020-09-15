@@ -25,7 +25,8 @@ class PageSection(Page_Internship):
     FOOTER_LINKS_BLOCK = (By.CSS_SELECTOR,
                           "div.container.clearfix li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children a")
 
-    TAB_DESCRIPTION = (By.CSS_SELECTOR, "li.description_tab.active" )
+    TAB_DESCRIPTION = (By.CSS_SELECTOR, "li.description_tab")
+    TAB_REVIEW = (By.CSS_SELECTOR, "li.reviews_tab")
 
     def verify_current_section(self):
 
@@ -153,8 +154,10 @@ class PageSection(Page_Internship):
         ActionChains(self.driver).move_to_element(top_link).click().perform()
         time.sleep(5)
 
-    def verify_product_description_section(self, description_section):
+    def verify_product_page_section(self, product_page_block):
         print("Perform your verification on page {}".format(self.driver.title))
-        self.verify_text(description_section.upper(), *self.TAB_DESCRIPTION)
-
+        if product_page_block == "DESCRIPTION BLOCK":
+            self.verify_text(product_page_block.upper(), *self.TAB_DESCRIPTION)
+        elif product_page_block == "REVIEW BLOCK":
+            self.verify_text(product_page_block.upper(), *self.TAB_REVIEW)
 

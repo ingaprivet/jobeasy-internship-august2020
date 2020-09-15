@@ -85,3 +85,13 @@ def verify_suggested_products_shown(context):
 @then('User is taken to correct pages upon click on Suggested products')
 def verify_correct_page_shown(context):
     context.app_internship.prod_page.verify_correct_page_shown()
+
+
+@then('Verify {product_page_block} for a Product is shown')
+def verify_product_page_section(context, product_page_block):
+    context.app_internship.page_section.verify_product_page_section(product_page_block)
+
+
+#@then('Verify {review_block} for a Product is shown')
+#def verify_product_review_section(context, review_block):
+#   context.app_internship.page_section.verify_product_review_section(review_block)
