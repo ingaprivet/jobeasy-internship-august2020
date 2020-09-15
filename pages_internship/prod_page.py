@@ -3,8 +3,15 @@ from pages_internship.base_page import Page_Internship
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 
+
 class Product_Internship(Page_Internship):
     print(f'in Product_Internship(Page_Internship)')
+
+    PRODUCT_IMAGE = (By.CSS_SELECTOR, "img.wp-post-image.skip-lazy")
+    PRODUCT_NAME = (By.CSS_SELECTOR, "h1.product-title")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, "p.price.product-page-price")
+    PRODUCT_DESCRIPTION = (By.CSS_SELECTOR, "div.product-short-description")
+
     SEARCH_INPUT = (
         By.CSS_SELECTOR, "li.header-search.header-search-dropdown.has-icon.has-dropdown.menu-item-has-children")
     SEARCH_TOOLTIP = (By.ID, 'woocommerce-product-search-field-0')
@@ -15,7 +22,6 @@ class Product_Internship(Page_Internship):
     ADD_BUTTON = (By.NAME, "add-to-cart")
     CHECKOUT_BUTTON = (By.CSS_SELECTOR, "a.button.checkout.wc-forward")
 
-
     ITEMS_AMOUNT_ON_PAGE = (By.XPATH, "//*[@title='Qty']")
     ITEMS_AMOUNT_IN_CART = (By.CSS_SELECTOR, "span.cart-icon.image-icon strong")
     ITEM_ADDED_MESSAGE = (By.CSS_SELECTOR, "div.message-container.container.success-color.medium-text-center")
@@ -24,8 +30,11 @@ class Product_Internship(Page_Internship):
 
     SUGGESTED_PRODUCT_AVAILABLE = (By.CSS_SELECTOR, "aside span.product-title")
 
-
-
+    REVIEW_COMMENT = (By.ID, "comment")
+    # REVIEW_COMMENT = (By.CSS_SELECTOR, "textarea")
+    # REVIEW_COMMENT = (By.CSS_SELECTOR, "p.comment-form-comment")
+    # REVIEW_COMMENT = (By.CSS_SELECTOR, "textarea#comment")
+    REVIEW_SUBMIT = (By.CSS_SELECTOR, "input#submit.submit")
 
     def open_prod_page(self, product_id):
         self.open_page(f'dp/product/{product_id}')
@@ -58,7 +67,6 @@ class Product_Internship(Page_Internship):
     # @Product results for Watch Series 5 are shown
     # will grab from class SearchResultsInternship(Page_Internship)
 
-
     def verify_item_added_message_shown(self, item_added_message_passed):
         item_added_message_shown = (self.find_element(*self.ITEM_ADDED_MESSAGE)).get_attribute("innerText")
         print("Perform your verification on page {}".format(self.driver.title))
@@ -77,7 +85,7 @@ class Product_Internship(Page_Internship):
 
         print("Perform your verification on page {}".format(self.driver.title))
         assert out_of_stock_message_passed in out_of_stock_message_shown, f'Expected text {out_of_stock_message_passed}, ' \
-                                                                      f'but got {out_of_stock_message_shown} '
+                                                                          f'but got {out_of_stock_message_shown} '
 
         print(f'Expected text: ' + out_of_stock_message_passed +
               f' is in the actual cart product title: ' + out_of_stock_message_shown)
@@ -113,7 +121,30 @@ class Product_Internship(Page_Internship):
         print("Perform your verification on page {}".format(self.driver.title))
         self.verify_text(page_expected, *self.UMAYLIKE_WIDGET)
 
+    #  then Verify Product review text can be submitted
+    def verify_product_review_submission(self, product_review_text):
+        print(f'product_review_text = ', product_review_text)
+        # e = self.driver.find_element(*self.REVIEW_COMMENT)
+        # e.send_keys(product_review_text)
+        # self.input(product_review_text, *self.REVIEW_COMMENT)
+        # self.click(*self.REVIEW_SUBMIT)
 
+    def verify_product_attributes_shown(self, product_image, product_name, product_price, product_description):
+        print("Perform your verification on page {}".format(self.driver.title))
 
+        assert self.find_element(*self.PRODUCT_IMAGE), f'Expected to find {self.find_element(*self.PRODUCT_IMAGE).get_attribute("title")} product image on a page'
+        print(f'Expected image for product: ' + self.find_element(*self.PRODUCT_IMAGE).get_attribute("title") +
+              f' is shown on this page ')
 
+        assert self.find_element(*self.PRODUCT_NAME), f'Expected to find {self.find_element(*self.PRODUCT_NAME).text} product name on a page'
+        print(f'Expected name for product: ' + self.find_element(*self.PRODUCT_NAME).text +
+              f' is shown on this page ')
+
+        assert self.find_element(*self.PRODUCT_PRICE), f'Expected to find {self.find_element(*self.PRODUCT_PRICE).text} product price on a page'
+        print(f'Expected price for product: ' + self.find_element(*self.PRODUCT_PRICE).text +
+              f' is shown on this page ')
+
+        assert self.find_element(*self.PRODUCT_DESCRIPTION), f'Expected to find {self.find_element(*self.PRODUCT_DESCRIPTION).text} product price on a page'
+        print(f'Expected description for product: ' + self.find_element(*self.PRODUCT_DESCRIPTION).text +
+             f' is shown on this page ')
 

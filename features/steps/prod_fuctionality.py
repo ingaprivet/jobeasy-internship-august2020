@@ -87,11 +87,22 @@ def verify_correct_page_shown(context):
     context.app_internship.prod_page.verify_correct_page_shown()
 
 
+@when('Verify {product_page_block} for a Product is shown')
+def verify_product_page_section(context, product_page_block):
+    context.app_internship.page_section.verify_product_page_section(product_page_block)
+
+
 @then('Verify {product_page_block} for a Product is shown')
 def verify_product_page_section(context, product_page_block):
     context.app_internship.page_section.verify_product_page_section(product_page_block)
 
 
-#@then('Verify {review_block} for a Product is shown')
-#def verify_product_review_section(context, review_block):
-#   context.app_internship.page_section.verify_product_review_section(review_block)
+@then('Verify {product_review_text} can be submitted')
+def verify_product_review_submission(context, product_review_text):
+    context.app_internship.prod_page.verify_product_review_submission(product_review_text)
+
+
+@then('Verify {product_image}, {product_name}, {product_price}, {product_description} are shown for a Product')
+def verify_product_attributes_shown(context, product_image, product_name, product_price, product_description):
+    context.app_internship.prod_page.verify_product_attributes_shown(product_image, product_name, product_price,
+                                                                     product_description)

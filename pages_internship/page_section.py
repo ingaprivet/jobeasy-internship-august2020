@@ -161,3 +161,4 @@ class PageSection(Page_Internship):
         elif product_page_block == "REVIEW BLOCK":
             self.verify_text(product_page_block.upper(), *self.TAB_REVIEW)
 
+
