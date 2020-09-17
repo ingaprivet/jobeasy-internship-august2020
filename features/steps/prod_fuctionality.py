@@ -102,7 +102,61 @@ def verify_product_review_submission(context, product_review_text):
     context.app_internship.prod_page.verify_product_review_submission(product_review_text)
 
 
-@then('Verify {product_image}, {product_name}, {product_price}, {product_description} are shown for a Product')
-def verify_product_attributes_shown(context, product_image, product_name, product_price, product_description):
-    context.app_internship.prod_page.verify_product_attributes_shown(product_image, product_name, product_price,
-                                                                     product_description)
+@then('Verify image, name, price, description are shown for a Product')
+def verify_product_attributes_shown(context):
+    context.app_internship.prod_page.verify_product_attributes_shown()
+
+
+@when('Verify User can zoom in product image')
+def verify_zoomin_product_image(context):
+    context.app_internship.prod_page.verify_zoomin_product_image()
+
+
+@then('Verify User can scroll thru Product images')
+def verify_scroll_product_images(context):
+    context.app_internship.prod_page.verify_scroll_product_images()
+
+
+@then('Verify User can close Product images by clicking x')
+def verify_close_product_images(context):
+    context.app_internship.prod_page.verify_close_product_images()
+
+
+@when('Hover over heart icon and click')
+def hover_click_heart_icon(context):
+    context.app_internship.prod_page.hover_click_heart_icon()
+
+
+@then('Verify Product is added to wishlist')
+def verify_product_added_wishlist(context):
+    context.app_internship.prod_page.verify_product_added_wishlist()
+
+
+@when('Click on HOME link')
+def click_home_link(context):
+    context.app_internship.prod_page.click_home_link()
+
+
+@then('User is taken to Home page')
+def verify_page_displayed(context):
+    context.app_internship.top_menu.verify_page_displayed()
+
+
+@when('Click on Accesories Product category link')
+def click_product_category_link(context):
+    context.app_internship.prod_page.click_product_category_link()
+
+
+@then('{accessories_category} Product category page is shown')
+def product_category_shown(context, accessories_category):
+    context.app_internship.prod_page.product_category_shown(accessories_category)
+
+
+@when('Social network logos are present')
+def social_network_logos_shown(context):
+    context.app_internship.prod_page.social_network_logos_shown()
+
+
+@then('Each click on a social network link opens a new login window')
+def hover_click_social_networks(context):
+    context.app_internship.prod_page.hover_click_social_networks()

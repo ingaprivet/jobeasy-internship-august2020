@@ -43,8 +43,10 @@ class CartServices(Page_Internship):
 
     def verify_correct_items_amount_displayed(self):
         print("Perform your verification on page {}".format(self.driver.title))
-        items_amount_page = (self.find_element(*self.ITEMS_AMOUNT_ON_PAGE)).get_attribute("value")
+
         items_amount_in_cart = (self.find_element(*self.ITEMS_AMOUNT_IN_CART)).text
+        items_amount_page = (self.find_element(*self.ITEMS_AMOUNT_ON_PAGE)).get_attribute("value")
+
         assert items_amount_page in items_amount_in_cart, f'Expected text {items_amount_page}, ' \
                                                           f'but got {items_amount_in_cart}'
         print(
@@ -103,5 +105,3 @@ class CartServices(Page_Internship):
 
     def input_quantity(self, input_quantity):
         self.input(input_quantity, *self.ITEMS_AMOUNT_ON_PAGE)
-
-

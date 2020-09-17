@@ -12,6 +12,7 @@ class Page_Internship:
         self.action = ActionChains(self.driver)
 
     def open_page(self, url=''):
+        print(f'url = ', url)
         self.driver.get(self.base_url + url)
 
     def click(self, *locator):
