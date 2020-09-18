@@ -6,6 +6,7 @@ from pages_internship.top_banner import TopBanner
 from pages_internship.cart_func import CartServices
 from pages_internship.page_section import PageSection
 from pages_internship.category_page import CategoryInternship
+from pages_internship.shop_func import ShopServices
 
 
 class Application_Internship:
@@ -21,6 +22,7 @@ class Application_Internship:
         self.cart_func = CartServices(self.driver)
         self.page_section = PageSection(self.driver)
         self.category_page = CategoryInternship(self.driver)
+        self.shop_func = ShopServices(self.driver)
 
 
 
