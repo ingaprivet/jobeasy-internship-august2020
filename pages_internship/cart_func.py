@@ -72,9 +72,11 @@ class CartServices(Page_Internship):
         self.click(*self.VIEW_CART_BUTTON)
 
     def verify_page(self):
+        print("in verify_page of CART_FUNC")
         print("Perform your verification on page {}".format(self.driver.title))
         current_page_text = (self.find_element(*self.CURRENT_PAGE)).text
         self.verify_text(current_page_text, *self.CURRENT_PAGE)
+        time.sleep(5)
 
     def click_checkout_button(self):
         self.click(*self.CHECKOUT_BUTTON)

@@ -32,6 +32,6 @@ def open_quick_view_add_cart(context):
     context.app_internship.category_page.open_quick_view_add_cart()
 
 
-@then('Verify Product quantity in cart')
+@then('Verify correct Product quantity in cart')
 def verify_correct_items_amount_displayed(context):
     context.app_internship.category_page.verify_correct_items_amount_displayed()

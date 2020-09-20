@@ -26,7 +26,7 @@ Scenario: User can add product to wishlist by hovering over product image and cl
   Then User is taken to Home page
 
 @smoke
-Scenario: Category link (i.e. iPhone) takes user to correct category page TMTN - 13 / TMTN - 14
+Scenario: Category link takes user to correct category page TMTN - 13 / TMTN - 14
   Given Open a Product airpods-pro page
   When Click on Accesories Product category link
   Then Accesories Product category page is shown

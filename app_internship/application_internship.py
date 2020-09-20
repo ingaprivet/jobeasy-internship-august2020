@@ -7,6 +7,8 @@ from pages_internship.cart_func import CartServices
 from pages_internship.page_section import PageSection
 from pages_internship.category_page import CategoryInternship
 from pages_internship.shop_func import ShopServices
+from pages_internship.checkout_page import CheckoutServices
+from pages_internship.wishlist_page import WishlistServices
 
 
 class Application_Internship:
@@ -23,6 +25,8 @@ class Application_Internship:
         self.page_section = PageSection(self.driver)
         self.category_page = CategoryInternship(self.driver)
         self.shop_func = ShopServices(self.driver)
+        self.checkout_page = CheckoutServices(self.driver)
+        self.wishlist_page = WishlistServices(self.driver)
 
 
 
