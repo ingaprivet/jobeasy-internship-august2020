@@ -61,7 +61,7 @@ Scenario:   TMTN - 21 / TMTN - 23
 Scenario:   TMTN - 21 / TMTN - 23
   Given Open Shop page
     Then Verify No products were found matching your selection shown if no products match selected filters
-  
+
 @smoke
 #Scenario:   TMTN - 21 / TMTN - 24
     #Given Open Shop page
