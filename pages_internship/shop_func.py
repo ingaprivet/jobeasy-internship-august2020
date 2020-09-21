@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -164,8 +165,6 @@ class ShopServices(Page_Internship):
         ActionChains(self.driver).move_to_element(filter_button).click().perform()
 
     def filtered_price_items_shown(self):
-
-        active_filters_text = self.find_element(*self.ACTIVE_FILTERS).text
         active_min_price_text = self.find_elements(*self.MIX_PRICE_FILTERED)[1].text
         active_max_price_text = self.find_elements(*self.MAX_PRICE_FILTERED)[1].text
 
@@ -209,18 +208,18 @@ class ShopServices(Page_Internship):
         self.verify_text(no_match_message, *self.NO_MATCH_BY_PRICE_MESSAGE)
 
     def verify_no_price_filter(self):
-        '''print("Perform your verification on page {}".format(self.driver.title))
-        active_filters_text = self.find_element(*self.ACTIVE_FILTERS).text
 
-        print("Perform your verification on page {}".format(self.driver.title))
-        assert self.find_element(
-            *self.ACTIVE_FILTERS), f'Expected to find {self.find_element(*self.ACTIVE_FILTERS).text} active filters on a page'
-        print(f'Expected  active filters block ' + self.find_element(*self.ACTIVE_FILTERS).text +
-              f' is shown on this page ')
-        time.sleep(5)
-        if active_filters_text.is_not_displayed():
-            print(f'Active filters block is  not shown on this page ')'''
-        pass
+        try:
+            self.find_element(*self.ACTIVE_FILTERS)
+            print("Perform your verification on page {}".format(self.driver.title))
+            assert self.find_element(
+                *self.ACTIVE_FILTERS), f'Expected to find {self.find_element(*self.ACTIVE_FILTERS).text} active filters on a page'
+            print(f'Expected  active filters block ' + self.find_element(*self.ACTIVE_FILTERS).text +
+                  f' is shown on this page ')
+
+        except NoSuchElementException:
+            print(f'Will handle NoSuchElementException')
+            print(f'Active filters block is not shown to the user')
 
     def sort_product_by_user_request(self, alias):
         element = self.find_element(*self.SELECT_ORDERBY)  #

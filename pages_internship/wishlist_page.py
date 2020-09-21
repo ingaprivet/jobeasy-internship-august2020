@@ -16,6 +16,8 @@ class WishlistServices(Page_Internship):
     WISHLIST_IMAGE = (By.CSS_SELECTOR, "td.product-thumbnail")
     WISHLIST_ITEM = (By.CSS_SELECTOR, "h1.product-title.product_title.entry-title")
 
+    NETWORKS_BLOCK = (By.CSS_SELECTOR, "div.yith-wcwl-share.social-icons.share-icons.share-row.relative")
+
     def open_wishlist_page(self):
         self.open_page(f'dp/my-account/wishlist/ ')
 

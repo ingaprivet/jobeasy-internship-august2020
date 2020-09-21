@@ -40,14 +40,12 @@ Scenario: Social network logos are present: FB, Twitter, Email, Pinterest Linked
 
 @smoke
 Scenario: User can add product to cart /  TMTN - 13 / TMTN - 15
-
   Given Open a Product airpods-pro page
   When Click on Add to Cart button
   Then Verify correct items quantity is shown in the cart
 
 @smoke
 Scenario: User can add product to cart click + button to modify amount of cart item and verify correct amount of items shown / TMTN - 13 / TMTN - 15
-
   Given Open a Product airpods-pro page
   When Click plus button
   And Click on Add to Cart button
@@ -55,7 +53,6 @@ Scenario: User can add product to cart click + button to modify amount of cart i
 
 @smoke
 Scenario: User can add product to cart click + button to modify amount of cart item and verify correct amount of items shown / TMTN - 13 / TMTN - 15
-
   Given Open a Product airpods-pro page
   When Click plus button
   And Click minus button
@@ -64,7 +61,6 @@ Scenario: User can add product to cart click + button to modify amount of cart i
 
 @smoke
 Scenario: User can add product to cart click + button to modify amount of cart item and verify correct amount of items shown / TMTN - 13 / TMTN - 15
-
   Given Open a Product airpods-pro page
   When Type in 5 quantity of items to be added to cart
   And Click on Add to Cart button
@@ -72,7 +68,6 @@ Scenario: User can add product to cart click + button to modify amount of cart i
 
 @smoke
 Scenario: User sees " ... have been added to your cart" confirmation upon adding items to cart  / TMTN - 13 / TMTN - 15
-
   Given Open a Product airpods-pro page
   When Click on Add to Cart button
   Then Verify been added to your cart confirmation message is shown

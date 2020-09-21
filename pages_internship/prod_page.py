@@ -233,7 +233,7 @@ class Product_Internship(Page_Internship):
 
         hover_networks_block = self.find_element(*self.NETWORKS_BLOCK)
         ActionChains(self.driver).move_to_element(hover_networks_block).perform()
-
+        time.sleep(5)
         assert self.find_element(
             *self.NETWORKS_BLOCK), f'Expected to find {self.find_element(*self.NETWORKS_BLOCK)} element on a page'
         print(f'Expected social networks block ' + self.find_element(*self.NETWORKS_BLOCK).text +
@@ -253,7 +253,7 @@ class Product_Internship(Page_Internship):
 
             link_info = link.get_attribute("href")
 
-            if not link_info.startswith('whatsapp') and not link_info.startswith('mailto') and not link_info.startswith('https://pinterest') :
+            if not link_info.startswith('whatsapp') and not link_info.startswith('https://tumblr.com/') and not link_info.startswith('mailto') and not link_info.startswith('https://pinterest') :
                 array_of_links.append(link_info)
 
         for link in array_of_links:

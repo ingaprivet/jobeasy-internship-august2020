@@ -41,10 +41,17 @@ def verify_product_removed_wishlist(context, product_removed_message):
 def click_remove_wishlist(context):
     context.app_internship.wishlist_page.click_remove_wishlist()
 
+
 @when('Click on Wishlist item')
 def click_wishlist_item(context):
     context.app_internship.wishlist_page.click_wishlist_item()
 
+
 @then('Verify {wishlist_item} Product page is shown')
 def open_product_page(context, wishlist_item):
     context.app_internship.wishlist_page.open_product_page(wishlist_item)
+
+
+@then('Verify User can see social logos to share wishlist items')
+def social_network_logos_shown(context):
+    context.app_internship.prod_page.social_network_logos_shown()

@@ -12,9 +12,10 @@ Scenario:   Add and remove products to/from Wishlist, verify user sees correct p
   Then Open Wishlist page
   And Verify Wishlist page opened
   And Verify AirPods Pro added to Wishlist
+  And Verify User can see social logos to share wishlist items
   Then Click on x to remove Product from Wishlist
   Then Verify Product successfully removed. is shown upon removal of Product from Wishlist
-  #User can see social logos to share wishlist items
+
 
 @smoke
 Scenario:   Add product to Wishlist, verify user can click on Wishlist item and is taken to correct product page TMTN - 30 / TMTN - 32
