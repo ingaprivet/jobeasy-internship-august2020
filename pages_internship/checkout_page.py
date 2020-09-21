@@ -11,7 +11,6 @@ import time
 class CheckoutServices(Page_Internship):
     print(f'in CheckoutServices(Page_Internship)')
 
-    COUNTRY_DROPDOWN = (By.CSS_SELECTOR, ".select2-selection__rendered")
     CART_ICON = (By.CSS_SELECTOR, ".cart-icon.image-icon")
     PLACE_ORDER_BUTTON = (By.ID, "place_order")
     INFO_MISSING_MESSAGE = (By.XPATH, "//li[contains(@data-id, 'billing_first_name')]")
@@ -28,16 +27,12 @@ class CheckoutServices(Page_Internship):
     INPUT_PHONE = (By.ID, "billing_phone")
     INPUT_EMAIL = (By.ID, "billing_email")
 
-    def click_country_dropdown(self, country):
-        print(f'click_count_dropdown')
-        # click_country_dropdown = self.find_element(*self.COUNTRY_DROPDOWN)
-        # ActionChains(self.driver).move_to_element(click_country_dropdown).click().perform()
+    COUNTRY_DROPDOWN = (By.ID, "billing_country")
 
-        self.input(country, *self.COUNTRY_DROPDOWN)
-
-        # e = browser.find_element_by_xpath('//[@id="react-select-5--value"]/div[2]/input')
-        # click_country_dropdown.send_keys("China")
-        # click_country_dropdown.send_keys(Keys.RETURN)
+    def click_country_dropdown(self, alias):
+        country_dropdown = self.find_element(*self.COUNTRY_DROPDOWN)
+        select = Select(country_dropdown)
+        select.select_by_value(alias)
         time.sleep(5)
 
     def go_back(self):
@@ -45,7 +40,9 @@ class CheckoutServices(Page_Internship):
         ActionChains(self.driver).move_to_element(cart_icon).click().perform()
 
     def place_order(self):
-        self.click(*self.PLACE_ORDER_BUTTON)
+        order_button = self.find_element(*self.PLACE_ORDER_BUTTON)
+        ActionChains(self.driver).move_to_element(order_button).click().perform()
+        time.sleep(10)
 
     def verify_info_missing_message(self, info_missing_expected):
         info_missing_expected_page = self.find_element(*self.INFO_MISSING_MESSAGE).text
@@ -59,7 +56,7 @@ class CheckoutServices(Page_Internship):
         # form_element.send_keys(test_wording)
 
         test_wording = 'Internship 2020 JobEasy'
-        self.input(test_wording, *self.INPUT_FIRST_NAME)
+        #self.input(test_wording, *self.INPUT_FIRST_NAME)
 
         self.input(test_wording, *self.INPUT_LAST_NAME)
 
@@ -73,16 +70,14 @@ class CheckoutServices(Page_Internship):
 
         self.input(test_wording, *self.INPUT_CITY)
 
-        # self.input(test_wording, *self.INPUT_STATE)
+        self.input(test_wording, *self.INPUT_STATE)
 
         self.input(test_wording, *self.INPUT_ZIP)
 
-        self.input(test_wording, *self.INPUT_PHONE)
+        self.input('646 2223333', *self.INPUT_PHONE)
 
-        self.input(test_wording, *self.INPUT_EMAIL)
+        self.input('gettop@gmail.com', *self.INPUT_EMAIL)
 
         time.sleep(5)
 
-        # self.click(*self.PLACE_ORDER_BUTTON)
-        place_order_button = self.find_element(*self.PLACE_ORDER_BUTTON)
-        ActionChains(self.driver).move_to_element(place_order_button).click().perform()
+
