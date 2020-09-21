@@ -2,6 +2,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 from pages_internship.base_page import Page_Internship
 import time
@@ -28,15 +29,12 @@ class ShopServices(Page_Internship):
 
     MIN_PRICE = (By.CSS_SELECTOR, "span.from")
     MAX_PRICE = (By.CSS_SELECTOR, "div.price_label span.to")
-
     MIX_PRICE_FILTERED = (By.XPATH, "//li[contains(@class, 'chosen')]//a[contains(text(),'Min')]")
     MAX_PRICE_FILTERED = (By.XPATH, "//li[contains(@class, 'chosen')]//a[contains(text(),'Max')]")
-    # CLEAR_FILTERS = (By.XPATH, "//div[contains(@class, 'inline-block')]//a[contains(@aria-label, 'Remove filter')]")
-    # CLEAR_FILTERS = (By.CSS_SELECTOR, "a.tooltipstered span.woocommerce-Price-amount.amount")
-
-    # CLEAR_FILTERS = (By.CSS_SELECTOR, "a.tooltipstered::before")
-    CLEAR_FILTERS = (By.CSS_SELECTOR, "li.chosen")
+    CLEAR_FILTERS = (By.CSS_SELECTOR, "ul li.chosen a")
     NO_MATCH_BY_PRICE_MESSAGE = (By.CSS_SELECTOR, "p.woocommerce-info")
+
+    SELECT_ORDERBY = (By.CSS_SELECTOR, ".orderby")
 
     def open_shop_page(self):
         self.open_page(f'dp/shop/ ')
@@ -94,7 +92,7 @@ class ShopServices(Page_Internship):
             category_title = e.get_attribute("text")
             print("Perform your verification on page {}".format(self.driver.title))
 
-            print(f'text = ', category_title)
+            # print(f'text = ', category_title)
 
             self.driver.execute_script(
                 "window.open('" + url_link + "');")  # Open the hrefs one by one through execute_script method in a new tab
@@ -192,21 +190,14 @@ class ShopServices(Page_Internship):
               f' is shown on this page ')
 
     def price_filter_reset(self):
-        pass
 
-        '''clear_filters_max = self.find_elements(*self.CLEAR_FILTERS)[0]
-        clear_filters_min = self.find_elements(*self.CLEAR_FILTERS)[1]
-
-        print(f'clear_filters_min = ', clear_filters_min)
-
+        clear_filters_max = self.find_elements(*self.CLEAR_FILTERS)[2]
         ActionChains(self.driver).move_to_element(clear_filters_max).click().perform()
-        time.sleep(2)
-        ActionChains(self.driver).move_to_element(clear_filters_min).click().perform()
-        time.sleep(2)
-        print("Perform your verification on page {}".format(self.driver.title))
-'''
 
-    def verify_no_match_message(self,no_match_message):
+        clear_filters_min = self.find_elements(*self.CLEAR_FILTERS)[1]
+        ActionChains(self.driver).move_to_element(clear_filters_min).click().perform()
+
+    def verify_no_match_message(self, no_match_message):
 
         slider_handle = self.find_elements(*self.SLIDER_HANDLE)[0]
         ActionChains(self.driver).click_and_hold(slider_handle).move_by_offset(300, 0).perform()
@@ -217,4 +208,21 @@ class ShopServices(Page_Internship):
         print("Perform your verification on page {}".format(self.driver.title))
         self.verify_text(no_match_message, *self.NO_MATCH_BY_PRICE_MESSAGE)
 
+    def verify_no_price_filter(self):
+        '''print("Perform your verification on page {}".format(self.driver.title))
+        active_filters_text = self.find_element(*self.ACTIVE_FILTERS).text
 
+        print("Perform your verification on page {}".format(self.driver.title))
+        assert self.find_element(
+            *self.ACTIVE_FILTERS), f'Expected to find {self.find_element(*self.ACTIVE_FILTERS).text} active filters on a page'
+        print(f'Expected  active filters block ' + self.find_element(*self.ACTIVE_FILTERS).text +
+              f' is shown on this page ')
+        time.sleep(5)
+        if active_filters_text.is_not_displayed():
+            print(f'Active filters block is  not shown on this page ')'''
+        pass
+
+    def sort_product_by_user_request(self, alias):
+        element = self.find_element(*self.SELECT_ORDERBY)  #
+        select = Select(element)
+        select.select_by_value(alias)

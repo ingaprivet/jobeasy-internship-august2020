@@ -90,3 +90,23 @@ def price_filter_reset(context):
 @then('Verify {no_math_message} shown if no products match selected filters')
 def verify_no_match_message(context, no_math_message):
     context.app_internship.shop_func.verify_no_match_message(no_math_message)
+
+
+@then('Verify no price filter shown on page')
+def verify_no_price_filter(context):
+    context.app_internship.shop_func.verify_no_price_filter()
+
+
+@then('User can sort products by {alias} high to low')
+def sort_product_by_user_request(context, alias):
+    context.app_internship.shop_func.sort_product_by_user_request(alias)
+
+
+@then('User can sort products by {alias} low to high')
+def sort_product_by_user_request(context, alias):
+    context.app_internship.shop_func.sort_product_by_user_request(alias)
+
+
+@then('User can sort products by {alias}')
+def sort_product_by_user_request(context, alias):
+    context.app_internship.shop_func.sort_product_by_user_request(alias)
