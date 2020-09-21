@@ -45,15 +45,15 @@ Scenario:   TMTN - 21 / TMTN - 25
 
 @smoke
 Scenario:   TMTN - 21 / TMTN - 24
-  Given Open Shop page
-   Then User can sort products by price high to low
-   And  User can sort products by price low to high
-   And  User can sort products by popularity
-   And  User can sort products by rating
+    Given Open Shop page
+    Then User can sort products by price high to low
+    And  User can sort products by price low to high
+    And  User can sort products by popularity
+    And  User can sort products by rating
 
 @smoke
 Scenario:   TMTN - 21 / TMTN - 23
-  Given Open Shop page
+    Given Open Shop page
     When User can use price Filter slider
     Then User can click Filter button
     Then Verify filtered by price items are shown
@@ -62,7 +62,7 @@ Scenario:   TMTN - 21 / TMTN - 23
 
 @smoke
 Scenario:   TMTN - 21 / TMTN - 23
-  Given Open Shop page
+    Given Open Shop page
     Then Verify No products were found matching your selection shown if no products match selected filters
 
 @smoke
