@@ -45,3 +45,7 @@ def logo_present(context):
 @then('Footer has working links to all product categories')
 def hover_click_top_links(context):
     context.app_internship.page_section.hover_click_top_links()
+
+@then ('All products in the footer have price, name, star-rating')
+def product_attributes_shown(context):
+    context.app_internship.page_section.product_attributes_shown()
