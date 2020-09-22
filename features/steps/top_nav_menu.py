@@ -51,10 +51,13 @@ def verify_found_results_text(context, search_text):
     context.app_internship.cart_func.verify_found_results_text(search_text)
 
 
-#@given('Open a Product page')
-#def open_amazon(context):
+# @given('Open a Product page')
+# def open_amazon(context):
 #    context.driver.get('https://gettop.us/product/airpods/')
 
+@given('Open Product {product_id} page')
+def open_prod_page(context, product_id):
+    context.app_internship.prod_page.open_prod_page(product_id)
 
 @when('Click on Add to Cart button')
 def click_add_button(context):
@@ -93,8 +96,9 @@ def click_view_cart_button(context):
 
 
 @then('Verify correct page is displayed')
-def verify_page(context):
+def verify_page_displayed(context):
     context.app_internship.cart_func.verify_page()
+    #context.app_internship.top_menu.verify_page_displayed()
 
 
 @then('Click on Checkout button')
@@ -105,6 +109,7 @@ def click_checkout_button(context):
 @then('Verify correct products shown')
 def verify_cart_correct_products(context):
     context.app_internship.cart_func.verify_cart_correct_products()
+    #context.app_internship.top_menu.verify_page_displayed()
 
 
 @then('Verify correct subtotal shown')

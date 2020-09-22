@@ -12,7 +12,7 @@ from pages_internship.wishlist_page import WishlistServices
 
 
 class Application_Internship:
-    print(f'in Application_Internship')
+    #print(f'in Application_Internship')
 
     def __init__(self, driver):
         self.driver = driver

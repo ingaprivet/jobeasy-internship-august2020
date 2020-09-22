@@ -4,7 +4,7 @@ import time
 
 
 class SearchResultsInternship(Page_Internship):
-    print(f'in SearchResultsInternship(Page_Internship)')
+    #print(f'in SearchResultsInternship(Page_Internship)')
 
     RESULTS_FOUND_MESSAGE = (By.XPATH, "//input[contains(@value, 'Watch Series 5')]")
     RESULTS_NOT_FOUND_MESSAGE = (By.XPATH, "//p[contains(text(),'No products were found matching your selection.')]")

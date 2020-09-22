@@ -8,13 +8,11 @@ Scenario:   TMTN - 21 / TMTN - 27
   Then User can see recently viewed items and open them
   And Verify User is taken to correct page
 
-
 @smoke
 Scenario:   TMTN - 21 / TMTN - 26
   Given Open Shop page
-  #Then User sees Accessories, IPad, IPhone, MacBook under Browse
+  Then User sees Accessories, AirPods, Watch, IPad, IPhone, MacBook Product Categories under Browse
   Then Verify click on Product Category opens Product category page
-
 
 @smoke
 Scenario:   TMTN - 21 / TMTN - 25
@@ -27,14 +25,12 @@ Scenario:   TMTN - 21 / TMTN - 25
     When User clicks Quick View & add product to cart
     Then Verify correct Product quantity in cart
 
-
 @smoke
 Scenario:   TMTN - 21 / TMTN - 25
     Given Open Shop page
     When User clicks trough multiple product pages by clicking 1, 2
     #fix next step to check for any page number / pass from prev step
     Then Verify correct Page 2 number is shown
-
 
 @smoke
 Scenario:   TMTN - 21 / TMTN - 25
@@ -70,6 +66,8 @@ Scenario:   TMTN - 21 / TMTN - 22
     Given Open Shop page
     Then User click on Home link
     And Verify Home page is displayed
+
+
 
 
 

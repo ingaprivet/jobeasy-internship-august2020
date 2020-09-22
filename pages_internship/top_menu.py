@@ -23,7 +23,7 @@ class TopNavMenu_Internship(Page_Internship):
         self.click(*self.LOGO_SUBMIT)
 
     def verify_page_displayed(self):
-        self.wait_for_element_appear(*self.CURRENT_PAGE)
+        self.find_elements(*self.CURRENT_PAGE)
 
     # @when 'Select a Mac product from header-nav-main and open correct product page'
     def select_product_opens_page(self):
@@ -67,7 +67,7 @@ class TopNavMenu_Internship(Page_Internship):
 
             self.driver.close()  # close the window
             self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handl
-            time.sleep(2)
+            #time.sleep(2)
 
             index += 1
             assert text_info_default in page_text_current, f'Expected {text_info_default} to be in {page_text_current}'
@@ -83,7 +83,7 @@ class TopNavMenu_Internship(Page_Internship):
             # hover over all items one by one
             ActionChains(self.driver).move_to_element(i).perform()
             text_to_verify_tooltip = i.get_attribute("text")
-            time.sleep(2)
+            #time.sleep(2)
 
             try:
                 tooltip = self.find_element(*self.TOOLTIP_DROPDOWN)
@@ -96,12 +96,12 @@ class TopNavMenu_Internship(Page_Internship):
     # @when 'Clicking on Account icon'
     def go_to_login_form(self):
         self.click(*self.ICON_USER)
-        time.sleep(2)
+        #time.sleep(2)
 
     # @then('Login form opens')
     def verify_login_form(self):
         self.wait_for_element_appear(*self.LOGIN_FORM)
-        time.sleep(2)
+        #time.sleep(2)
 
 
 

@@ -10,39 +10,32 @@ import time
 
 
 class ShopServices(Page_Internship):
-    print(f'in ShopServices(Page_Internship)')
+    #print(f'in ShopServices(Page_Internship)')
 
     RECENTLY_VIEWD_BLOCK = (By.CSS_SELECTOR, "aside.widget.woocommerce.widget_recently_viewed_products")
     RECENTLY_VIEWD_ITEMS = (By.CSS_SELECTOR, "aside ul.product_list_widget a")
-
     BROWSE_CATEGORIES = (By.CSS_SELECTOR, "li.cat-item a")
     NEXT_PAGE_ICON = (By.CSS_SELECTOR, "a.page-number")
     NEXT_PAGE_ARROW = (By.CSS_SELECTOR, "a.next.page-number")
-
     PAGE_TEXT_CURRENT = (By.XPATH, "//*[contains(text(),'Page 2')]")
     GO_HOME_LINK = (By.XPATH, "//a[contains(text(),'Home')]")
-
     SLIDER_HANDLE = (By.CSS_SELECTOR, "span.ui-slider-handle")
-
     FILTER_BUTTON = (By.CSS_SELECTOR, "div.price_slider_amount button")
-
     ACTIVE_FILTERS = (By.CSS_SELECTOR, "h2.widgettitle")
-
     MIN_PRICE = (By.CSS_SELECTOR, "span.from")
     MAX_PRICE = (By.CSS_SELECTOR, "div.price_label span.to")
     MIX_PRICE_FILTERED = (By.XPATH, "//li[contains(@class, 'chosen')]//a[contains(text(),'Min')]")
     MAX_PRICE_FILTERED = (By.XPATH, "//li[contains(@class, 'chosen')]//a[contains(text(),'Max')]")
     CLEAR_FILTERS = (By.CSS_SELECTOR, "ul li.chosen a")
     NO_MATCH_BY_PRICE_MESSAGE = (By.CSS_SELECTOR, "p.woocommerce-info")
-
     SELECT_ORDERBY = (By.CSS_SELECTOR, ".orderby")
+    CATEGORY_ACCES = (By.XPATH, "//span[contains(text(),'Best Selling')]")
 
     def open_shop_page(self):
         self.open_page(f'dp/shop/ ')
 
     def recently_viewed_items_shown(self):
         print("Perform your verification on page {}".format(self.driver.title))
-
         assert self.find_element(
             *self.RECENTLY_VIEWD_BLOCK), f'Expected to find {self.find_element(*self.RECENTLY_VIEWD_BLOCK).get_attribute("title")} recently viewed items on a page'
         print(
@@ -75,22 +68,52 @@ class ShopServices(Page_Internship):
             self.driver.close()  # close the window
             self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handle
 
-    def verify_categories_block(self, cat_01, cat_02, cat_03, cat_04):
-        '''def verify_footer_section(self, footer_cat01, footer_cat02, footer_cat03):
-            print("Perform your verification on page {}".format(self.driver.title))
-            self.verify_text(footer_cat01.upper(), *self.BEST_SELLING_FOOTER)
-            self.verify_text(footer_cat02.upper(), *self.LATEST_FOOTER)
-            self.verify_text(footer_cat03.upper(), *self.TOP_RATED_FOOTER)'''
-        pass
+    def verify_categories_block(self, cat_01, cat_02, cat_03, cat_04, cat_05, cat_06):
+        open_accessories = self.find_elements(*self.BROWSE_CATEGORIES)[0]
+        ActionChains(self.driver).move_to_element(open_accessories).click().perform()
+
+        print("Perform your verification on page {}".format(self.driver.title))
+        # 1 Accessories, 2 AirPods, 3 Watch, 4 IPad, 5 IPhone, 6 MacBook
+
+        assert cat_01 in self.find_elements(*self.BROWSE_CATEGORIES)[0].text, f'Expected {cat_01} ' \
+                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[0].text} '
+        print(f'Expected text: ' + cat_01 + f' is in the actual yes!'
+                                            f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[0].text)
+
+        assert cat_02 in self.find_elements(*self.BROWSE_CATEGORIES)[1].text, f'Expected {cat_02} ' \
+                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[1].text} '
+        print(f'Expected text: ' + cat_02 + f' is in the actual yes!'
+                                            f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[1].text)
+
+        assert cat_03 in self.find_elements(*self.BROWSE_CATEGORIES)[2].text, f'Expected {cat_03} ' \
+                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[2].text} '
+        print(f'Expected text: ' + cat_03 + f' is in the actual yes!'
+                                            f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[2].text)
+
+        assert cat_04.upper() in self.find_elements(*self.BROWSE_CATEGORIES)[3].text.upper(), f'Expected {cat_04} ' \
+                                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[3].text} '
+        print(f'Expected text: ' + cat_04.upper() + f' is in the actual yes!'
+                                                    f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[
+                  3].text.upper())
+
+        assert cat_05.upper() in self.find_elements(*self.BROWSE_CATEGORIES)[4].text.upper(), f'Expected {cat_05} ' \
+                                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[4].text} '
+        print(f'Expected text: ' + cat_05.upper() + f' is in the actual yes!'
+                                                    f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[
+                  4].text.upper())
+
+        assert cat_06 in self.find_elements(*self.BROWSE_CATEGORIES)[5].text, f'Expected {cat_06} ' \
+                                                                              f'to be in {self.find_elements(*self.BROWSE_CATEGORIES)[5].text} '
+        print(f'Expected text: ' + cat_06 + f' is in the actual yes!'
+                                            f'text: ' + self.find_elements(*self.BROWSE_CATEGORIES)[5].text)
 
     def click_open_category_page(self):
-
         browse_categories = self.find_elements(*self.BROWSE_CATEGORIES)
         windows_before = self.driver.current_window_handle  # Store the parent_window_handle for future use
 
         for e in browse_categories:
             url_link = e.get_attribute("href")
-            category_title = e.get_attribute("text")
+            #category_title = e.get_attribute("text")
             print("Perform your verification on page {}".format(self.driver.title))
 
             # print(f'text = ', category_title)
@@ -125,11 +148,7 @@ class ShopServices(Page_Internship):
         # time.sleep(5)
 
     def verify_correct_page_number_shown(self, expected_page_text):
-
         print("Perform your verification on page {}".format(self.driver.title))
-        # page_text = self.find_element(
-        #   *self.PAGE_TEXT_CURRENT).get_attribute("innerText")
-
         assert self.find_element(*self.PAGE_TEXT_CURRENT).get_attribute("innerText"), \
             f'Expected to find {expected_page_text} ' \
             f'product category on a page'
@@ -138,22 +157,18 @@ class ShopServices(Page_Internship):
               self.find_element(*self.PAGE_TEXT_CURRENT).get_attribute("innerText"))
 
     def go_home(self):
-        print("Perform your verification on page {}".format(self.driver.title))
         go_home_link = self.find_element(*self.GO_HOME_LINK)
         ActionChains(self.driver).move_to_element(go_home_link).click(go_home_link).perform()
 
     def use_price_filter(self):
         slider_handle = self.find_elements(*self.SLIDER_HANDLE)[0]
-
         ActionChains(self.driver).click_and_hold(slider_handle).move_by_offset(100, 0).perform()
         # time.sleep(5)
-
         min_price = self.find_element(*self.MIN_PRICE).get_attribute("innerText")
         max_price = self.find_element(*self.MAX_PRICE).get_attribute("innerText")
         self.driver.response = min_price, max_price  # this will create a tuple to be passed to the next step
 
         print("Perform your verification on page {}".format(self.driver.title))
-
         assert self.find_element(
             *self.SLIDER_HANDLE), f'Expected to find {self.find_element(*self.SLIDER_HANDLE).text} price ' \
                                   f'filter slider on a page'
@@ -167,7 +182,6 @@ class ShopServices(Page_Internship):
     def filtered_price_items_shown(self):
         active_min_price_text = self.find_elements(*self.MIX_PRICE_FILTERED)[1].text
         active_max_price_text = self.find_elements(*self.MAX_PRICE_FILTERED)[1].text
-
         price_expected = self.driver.response
         min_price_expected = price_expected[0]
         max_price_expected = price_expected[1]
@@ -189,18 +203,14 @@ class ShopServices(Page_Internship):
               f' is shown on this page ')
 
     def price_filter_reset(self):
-
         clear_filters_max = self.find_elements(*self.CLEAR_FILTERS)[2]
         ActionChains(self.driver).move_to_element(clear_filters_max).click().perform()
-
         clear_filters_min = self.find_elements(*self.CLEAR_FILTERS)[1]
         ActionChains(self.driver).move_to_element(clear_filters_min).click().perform()
 
     def verify_no_match_message(self, no_match_message):
-
         slider_handle = self.find_elements(*self.SLIDER_HANDLE)[0]
         ActionChains(self.driver).click_and_hold(slider_handle).move_by_offset(300, 0).perform()
-
         filter_button = self.find_element(*self.FILTER_BUTTON)
         ActionChains(self.driver).move_to_element(filter_button).click().perform()
 
@@ -208,7 +218,6 @@ class ShopServices(Page_Internship):
         self.verify_text(no_match_message, *self.NO_MATCH_BY_PRICE_MESSAGE)
 
     def verify_no_price_filter(self):
-
         try:
             self.find_element(*self.ACTIVE_FILTERS)
             print("Perform your verification on page {}".format(self.driver.title))
@@ -216,12 +225,11 @@ class ShopServices(Page_Internship):
                 *self.ACTIVE_FILTERS), f'Expected to find {self.find_element(*self.ACTIVE_FILTERS).text} active filters on a page'
             print(f'Expected  active filters block ' + self.find_element(*self.ACTIVE_FILTERS).text +
                   f' is shown on this page ')
-
         except NoSuchElementException:
             print(f'Will handle NoSuchElementException')
             print(f'Active filters block is not shown to the user')
 
     def sort_product_by_user_request(self, alias):
-        element = self.find_element(*self.SELECT_ORDERBY)  #
+        element = self.find_element(*self.SELECT_ORDERBY)
         select = Select(element)
         select.select_by_value(alias)

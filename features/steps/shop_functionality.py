@@ -17,9 +17,9 @@ def item_page_shown(context):
     context.app_internship.shop_func.item_page_shown()
 
 
-@then('User sees {cat_01}, {cat_02}, {cat_03}, {cat_04} under Browse')
-def verify_categories_block(context, cat_01, cat_02, cat_03, cat_04):
-    context.app_internship.shop_func.verify_categories_blick(cat_01, cat_02, cat_03, cat_04)
+@then('User sees {cat_01}, {cat_02}, {cat_03}, {cat_04}, {cat_05}, {cat_06} Product Categories under Browse')
+def verify_categories_block(context, cat_01, cat_02, cat_03, cat_04, cat_05, cat_06):
+    context.app_internship.shop_func.verify_categories_block(cat_01, cat_02, cat_03, cat_04, cat_05, cat_06)
 
 
 @then('Verify click on Product Category opens Product category page')

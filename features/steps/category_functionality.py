@@ -35,3 +35,8 @@ def open_quick_view_add_cart(context):
 @then('Verify correct Product quantity in cart')
 def verify_correct_items_amount_displayed(context):
     context.app_internship.category_page.verify_correct_items_amount_displayed()
+
+
+@then('Only items of correct category {iphone} are shown')
+def verify_product_category(context, iphone):
+    context.app_internship.category_page.verify_product_category(iphone)

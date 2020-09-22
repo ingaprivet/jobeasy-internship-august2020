@@ -9,7 +9,7 @@ import time
 
 
 class CheckoutServices(Page_Internship):
-    print(f'in CheckoutServices(Page_Internship)')
+    # print(f'in CheckoutServices(Page_Internship)')
 
     CART_ICON = (By.CSS_SELECTOR, ".cart-icon.image-icon")
     PLACE_ORDER_BUTTON = (By.ID, "place_order")
@@ -33,7 +33,6 @@ class CheckoutServices(Page_Internship):
         country_dropdown = self.find_element(*self.COUNTRY_DROPDOWN)
         select = Select(country_dropdown)
         select.select_by_value(alias)
-        time.sleep(5)
 
     def go_back(self):
         cart_icon = self.find_element(*self.CART_ICON)
@@ -42,7 +41,6 @@ class CheckoutServices(Page_Internship):
     def place_order(self):
         order_button = self.find_element(*self.PLACE_ORDER_BUTTON)
         ActionChains(self.driver).move_to_element(order_button).click().perform()
-        time.sleep(10)
 
     def verify_info_missing_message(self, info_missing_expected):
         info_missing_expected_page = self.find_element(*self.INFO_MISSING_MESSAGE).text
@@ -56,7 +54,7 @@ class CheckoutServices(Page_Internship):
         # form_element.send_keys(test_wording)
 
         test_wording = 'Internship 2020 JobEasy'
-        #self.input(test_wording, *self.INPUT_FIRST_NAME)
+        # self.input(test_wording, *self.INPUT_FIRST_NAME)
 
         self.input(test_wording, *self.INPUT_LAST_NAME)
 
@@ -77,7 +75,4 @@ class CheckoutServices(Page_Internship):
         self.input('646 2223333', *self.INPUT_PHONE)
 
         self.input('gettop@gmail.com', *self.INPUT_EMAIL)
-
-        time.sleep(5)
-
-
+        time.sleep(2)

@@ -3,16 +3,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages_internship.base_page import Page_Internship
 from selenium.webdriver import ActionChains
-
+import time
 
 class CategoryInternship(Page_Internship):
-    print(f'in CategoryInternship(Page_Internship)')
+    #print(f'in CategoryInternship(Page_Internship)')
 
     RESULTS_MESSAGE = (By.CSS_SELECTOR, "p.woocommerce-result-count.hide-for-medium")
     RESULT_ITEMS_ICONS = (By.CSS_SELECTOR, "div.product-small.col")
     PRODUCT_CATEGORY = (By.CSS_SELECTOR, "p.category.uppercase")
     PRODUCT_NAME = (By.CSS_SELECTOR, "p.name.product-title")
     PRODUCT_PRICE = (By.CSS_SELECTOR, "div.price-wrapper")
+    PRODUCT_TITLE = (By.CSS_SELECTOR, "p.name.product-title")
 
     QUICK_VIEW = (By.CSS_SELECTOR, "a.quick-view.quick-view-added")
     # QUICK_VIEW_CLOSE = (By.CSS_SELECTOR, ".pswp__button--close")
@@ -28,28 +29,25 @@ class CategoryInternship(Page_Internship):
 
     def results_message_present(self):
         print("Perform your verification on page {}".format(self.driver.title))
-
         assert self.find_element(
             *self.RESULTS_MESSAGE).text, f'Expected to find {self.find_element(*self.RESULTS_MESSAGE).text} results message on a page'
         print(f'Expected results message ' + self.find_element(*self.RESULTS_MESSAGE).text +
               f' is presented on this page ')
 
     def verify_items_presented(self, items_expected):
-        print("Perform your verification on page {}".format(self.driver.title))
-
         result_items_icons = self.find_elements(*self.RESULT_ITEMS_ICONS)
 
         counter = 0
 
         for link in result_items_icons:
             counter += 1
+        print("Perform your verification on page {}".format(self.driver.title))
         assert items_expected in str(counter), f'Expected {items_expected} to be in {str(counter)}'
         print(f'Expected items quantity: ' + items_expected + f' is in the actual items quantity: ' + str(counter))
 
     def verify_item_attributes_shown(self):
-        print("Perform your verification on page {}".format(self.driver.title))
-
         result_items_icons = self.find_elements(*self.RESULT_ITEMS_ICONS)
+        print("Perform your verification on page {}".format(self.driver.title))
 
         for link in result_items_icons:
             assert self.find_element(
@@ -92,13 +90,29 @@ class CategoryInternship(Page_Internship):
         # self.driver.execute_script("arguments[0].click();", quick_view_add_button)
 
     def verify_correct_items_amount_displayed(self):
-        print("Perform your verification on page {}".format(self.driver.title))
 
         items_amount_quick_view = self.driver.response
+        # items_amount_in_cart = self.find_element(*self.ITEMS_AMOUNT_IN_CART)
+        # ActionChains(self.driver).move_to_element(items_amount_in_cart).perform()
+        items_amount_in_cart_text = self.find_element(*self.ITEMS_AMOUNT_IN_CART).text
+        time.sleep(2)
 
-        items_amount_in_cart = (self.find_element(*self.ITEMS_AMOUNT_IN_CART)).text
-
-        assert items_amount_quick_view in items_amount_in_cart, f'Expected text {items_amount_quick_view}, ' \
-                                                                f'but got {items_amount_in_cart}'
+        print("Perform your verification on page {}".format(self.driver.title))
+        assert items_amount_quick_view in items_amount_in_cart_text, f'Expected text {items_amount_quick_view}, ' \
+                                                                     f'but got {items_amount_in_cart_text}'
         print(
-            f'Expected amount: ' + items_amount_quick_view + f' is in the actual cart items amount: ' + items_amount_in_cart)
+            f'Expected amount: ' + items_amount_quick_view + f' is in the actual cart items amount: ' + items_amount_in_cart_text)
+
+    def verify_product_category(self, product_title_expected):
+        product_title = self.find_elements(*self.PRODUCT_TITLE)
+        index = 0
+        print("Perform your verification on page {}".format(self.driver.title))
+        for title in product_title:
+            assert product_title_expected in self.find_elements(*self.PRODUCT_TITLE)[
+                index].text, f'Expected {product_title_expected} ' \
+                             f'to be in {self.find_elements(*self.PRODUCT_TITLE)[index].text} '
+            print(f'Expected text: ' + product_title_expected + f' is in the actual'
+                                                                f'text: ' + self.find_elements(*self.PRODUCT_TITLE)[
+                      index].text)
+
+            index += 1

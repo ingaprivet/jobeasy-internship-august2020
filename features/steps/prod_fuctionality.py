@@ -160,3 +160,12 @@ def social_network_logos_shown(context):
 @then('Each click on a social network link opens a new login window')
 def hover_click_social_networks(context):
     context.app_internship.prod_page.hover_click_social_networks()
+
+@then('Only items of correct category are shown')
+def verify_product_category(context):
+    context.app_internship.prod_page.verify_product_category()
+
+@then('Verify correct quantity of product reviews is shown')
+def verify_quantity_review(context):
+    context.app_internship.prod_page.verify_quantity_review()
+

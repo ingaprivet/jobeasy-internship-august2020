@@ -61,7 +61,7 @@ class PageSection(Page_Internship):
     def hover_and_show(self):
 
         hover_cat_block = self.find_elements(*self.PRODUCT_CATEGORIES)
-        time.sleep(2)
+        #time.sleep(2)
 
         windows_before = self.driver.current_window_handle  # Store the parent_window_handle for future use
 
@@ -95,11 +95,11 @@ class PageSection(Page_Internship):
                     print("Perform your verification on page {}".format(self.driver.title))
                     assert url_link == windows_new, f'Expected {windows_new} url address, but got {url_link} url address'
                     print(f'Expected url: ' + url_link + f' is in the actual url: ' + windows_new)
-                    time.sleep(3)
+                    #time.sleep(3)
 
             self.driver.close()  # close the window
             self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handle
-            time.sleep(2)
+            #time.sleep(2)
 
             index += 1
 
@@ -152,7 +152,7 @@ class PageSection(Page_Internship):
     def hover_click_top_link(self):
         top_link = self.find_element(*self.TOP_LINK)
         ActionChains(self.driver).move_to_element(top_link).click().perform()
-        time.sleep(5)
+        #time.sleep(5)
 
     def verify_product_page_section(self, product_page_block):
         print("Perform your verification on page {}".format(self.driver.title))

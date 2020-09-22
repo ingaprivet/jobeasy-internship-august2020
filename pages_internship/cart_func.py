@@ -21,8 +21,7 @@ class CartServices(Page_Internship):
     PRODUCT_PRICE_ON_PAGE = (By.CSS_SELECTOR, "p.price.product-page-price")
     PRODUCT_PRICE_IN_CART = (By.CSS_SELECTOR, "span.cart-price")
     PRODUCT_TITLE_ON_PAGE = (By.CSS_SELECTOR, "h1.product-title.product_title.entry-title")
-    # PRODUCT_TITLE_IN_CART =  (By.CSS_SELECTOR, "a[href*='gettop.us/product/airpods/']")
-    PRODUCT_TITLE_IN_CART = (By.XPATH, "//a[contains(text(),'AirPods with Wireless Charging Case')]")
+    PRODUCT_TITLE_IN_CART =  (By.CSS_SELECTOR, "li.woocommerce-mini-cart-item.mini_cart_item a")
 
     ITEMS_AMOUNT_ON_PAGE = (By.XPATH, "//*[@title='Qty']")
     ITEMS_AMOUNT_IN_CART = (By.CSS_SELECTOR, "span.cart-icon.image-icon strong")
@@ -55,10 +54,10 @@ class CartServices(Page_Internship):
         # self.verify_text(items_amount_page, self.ITEMS_AMOUNT_IN_CART)
 
     def hover_cart_icon(self):
-        cart_icon = self.find_element(*self.CART_ICON)
-        ActionChains(self.driver).move_to_element(cart_icon).perform()
+        #cart_icon = self.find_element(*self.CART_ICON)
+        #ActionChains(self.driver).move_to_element(cart_icon).perform()
         cart_tooltip = self.find_element(*self.CART_TOOLTIP)
-        # self.driver.implicitly_wait(20)
+        ActionChains(self.driver).move_to_element(cart_tooltip).perform()
 
     def click_remove_from_cart(self):
         self.click(*self.REMOVE_BUTTON)
@@ -72,11 +71,9 @@ class CartServices(Page_Internship):
         self.click(*self.VIEW_CART_BUTTON)
 
     def verify_page(self):
-        print("in verify_page of CART_FUNC")
         print("Perform your verification on page {}".format(self.driver.title))
         current_page_text = (self.find_element(*self.CURRENT_PAGE)).text
         self.verify_text(current_page_text, *self.CURRENT_PAGE)
-        time.sleep(5)
 
     def click_checkout_button(self):
         self.click(*self.CHECKOUT_BUTTON)
@@ -84,10 +81,10 @@ class CartServices(Page_Internship):
     def verify_cart_correct_products(self):
         print("Perform your verification on page {}".format(self.driver.title))
         product_title_text_page = self.find_element(*self.PRODUCT_TITLE_ON_PAGE).text
-        product_title_text_cart = self.find_element(*self.PRODUCT_TITLE_IN_CART).get_attribute("innerText")
+        product_title_text_cart = self.find_elements(*self.PRODUCT_TITLE_IN_CART)[1].text
+
         assert product_title_text_page in product_title_text_cart, f'Expected text {product_title_text_page}, ' \
                                                                    f'but got {product_title_text_cart} '
-
         print(f'Expected text: ' + product_title_text_page +
               f' is in the actual cart product title: ' + product_title_text_cart)
 

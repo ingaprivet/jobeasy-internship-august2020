@@ -18,7 +18,7 @@ class TopBanner(Page_Internship):
     # @when('Click on right and left arrows')
     def click_arrows(self):
         self.click(*self.CLICK_ARROW)
-        time.sleep(5)
+        #time.sleep(5)
 
     # @when('Click bottom dots')
     def click_bottom_dots(self):

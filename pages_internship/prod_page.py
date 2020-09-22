@@ -8,7 +8,7 @@ import time
 
 
 class Product_Internship(Page_Internship):
-    print(f'in Product_Internship(Page_Internship)')
+    #print(f'in Product_Internship(Page_Internship)')
 
     PRODUCT_IMAGE = (By.CSS_SELECTOR, "img.wp-post-image.skip-lazy")
     PRODUCT_NAME = (By.CSS_SELECTOR, "h1.product-title")
@@ -137,11 +137,14 @@ class Product_Internship(Page_Internship):
 
     #  then Verify Product review text can be submitted
     def verify_product_review_submission(self, product_review_text):
-        print(f'product_review_text = ', product_review_text)
+        pass
         # e = self.driver.find_element(*self.REVIEW_COMMENT)
         # e.send_keys(product_review_text)
         # self.input(product_review_text, *self.REVIEW_COMMENT)
         # self.click(*self.REVIEW_SUBMIT)
+
+    def verify_quantity_review(self):
+        pass
 
     def verify_product_attributes_shown(self):
         print("Perform your verification on page {}".format(self.driver.title))
@@ -168,7 +171,7 @@ class Product_Internship(Page_Internship):
 
     def verify_zoomin_product_image(self):
         ActionChains(self.driver).move_to_element(self.find_element(*self.ZOOM_ICON)).click().perform()
-        time.sleep(5)
+        #time.sleep(5)
         print("Perform your verification on page {}".format(self.driver.title))
 
         assert self.find_element(
@@ -178,7 +181,7 @@ class Product_Internship(Page_Internship):
 
     def verify_scroll_product_images(self):
         ActionChains(self.driver).move_to_element(self.find_element(*self.SCROLL_ARROW)).click().perform()
-        time.sleep(5)
+        #time.sleep(5)
 
         print("Perform your verification on page {}".format(self.driver.title))
         assert self.find_element(
@@ -191,7 +194,7 @@ class Product_Internship(Page_Internship):
         # ActionChains(self.driver).move_to_element(self.find_element(*self.CLOSE_ICON)).click().perform()
 
         self.click(*self.CLOSE_ICON)
-        time.sleep(5)
+        #time.sleep(5)
 
         print("Perform your verification on page {}".format(self.driver.title))
         assert self.find_element(
@@ -202,7 +205,7 @@ class Product_Internship(Page_Internship):
     def hover_click_heart_icon(self):
         heart_icon = self.find_element(*self.ICON_HEART)
         ActionChains(self.driver).move_to_element(heart_icon).click().perform()
-        time.sleep(5)
+        #time.sleep(5)
 
         # take screenshot
         self.driver.save_screenshot("pageImage.png")
@@ -233,7 +236,7 @@ class Product_Internship(Page_Internship):
 
         hover_networks_block = self.find_element(*self.NETWORKS_BLOCK)
         ActionChains(self.driver).move_to_element(hover_networks_block).perform()
-        time.sleep(5)
+        #time.sleep(5)
         assert self.find_element(
             *self.NETWORKS_BLOCK), f'Expected to find {self.find_element(*self.NETWORKS_BLOCK)} element on a page'
         print(f'Expected social networks block ' + self.find_element(*self.NETWORKS_BLOCK).text +
@@ -241,7 +244,7 @@ class Product_Internship(Page_Internship):
 
     def hover_click_social_networks(self):
         hover_networks_icons = self.find_elements(*self.NETWORKS_ICONS)
-        time.sleep(2)
+        #time.sleep(2)
 
         windows_before = self.driver.current_window_handle  # Store the parent_window_handle for future use
 
@@ -274,10 +277,10 @@ class Product_Internship(Page_Internship):
                         windows_new[:25]) != -1, f'Expected {url_link[:25]} to be in {windows_new[:25]}'
 
                     print(f'Expected url: ' + url_link[:25] + f' is in the actual url: ' + windows_new[:25])
-                    time.sleep(3)
+                    #time.sleep(3)
 
             self.driver.close()  # close the window
             self.driver.switch_to.window(windows_before)  # switch_to the parent_window_handle
-            time.sleep(2)
+            #time.sleep(2)
 
             index += 1

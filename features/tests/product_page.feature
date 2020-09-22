@@ -104,8 +104,8 @@ Scenario: User can see product description block TMTN - 13 / TMTN - 17
 Scenario: User can submit a review and see correct  amount of product reviews displayed TMTN - 13 / TMTN - 18
   Given Open a Product airpods-pro page
   When Verify Review block for a Product is shown
-  #Then Verify Product review text can be submitted
-  #And Verify correct quantity of product reviews is shown
+  Then Verify Product review text can be submitted
+  And Verify correct quantity of product reviews is shown
 
 
 
