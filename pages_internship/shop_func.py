@@ -5,12 +5,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 import time
 
 
-class ShopServices(Page_Internship):
-    #print(f'in ShopServices(Page_Internship)')
+class ShopServices(PageServices):
+    #print(f'in ShopServices(PageServices)')
 
     RECENTLY_VIEWD_BLOCK = (By.CSS_SELECTOR, "aside.widget.woocommerce.widget_recently_viewed_products")
     RECENTLY_VIEWD_ITEMS = (By.CSS_SELECTOR, "aside ul.product_list_widget a")

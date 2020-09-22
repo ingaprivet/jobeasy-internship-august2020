@@ -1,12 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 from selenium.webdriver import ActionChains
 import time
 
-class CategoryInternship(Page_Internship):
-    #print(f'in CategoryInternship(Page_Internship)')
+class CategoryServices(PageServices):
+    #print(f'in CategoryServices(PageServices)')
 
     RESULTS_MESSAGE = (By.CSS_SELECTOR, "p.woocommerce-result-count.hide-for-medium")
     RESULT_ITEMS_ICONS = (By.CSS_SELECTOR, "div.product-small.col")

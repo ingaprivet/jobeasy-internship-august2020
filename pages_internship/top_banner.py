@@ -1,11 +1,11 @@
 from selenium.webdriver import ActionChains
 
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 from selenium.webdriver.common.by import By
 import time
 
 
-class TopBanner(Page_Internship):
+class TopBannerServices(PageServices):
     CLICK_ARROW = (By.CSS_SELECTOR, "svg.flickity-button-icon")
     CLICK_DOTS = (By.CSS_SELECTOR, "li.dot")
 

@@ -1,14 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 import time
 
 
-class Product_Internship(Page_Internship):
-    #print(f'in Product_Internship(Page_Internship)')
+class ProductServices(PageServices):
+    #print(f'in ProductServices(PageServices)')
 
     PRODUCT_IMAGE = (By.CSS_SELECTOR, "img.wp-post-image.skip-lazy")
     PRODUCT_NAME = (By.CSS_SELECTOR, "h1.product-title")
@@ -79,7 +79,7 @@ class Product_Internship(Page_Internship):
         self.click(*self.SEARCH_SUBMIT)
 
     # @Product results for Watch Series 5 are shown
-    # will grab from class SearchResultsInternship(Page_Internship)
+    # will grab from class SearchResultsInternship(PageServices)
 
     def verify_item_added_message_shown(self, item_added_message_passed):
         item_added_message_shown = (self.find_element(*self.ITEM_ADDED_MESSAGE)).get_attribute("innerText")

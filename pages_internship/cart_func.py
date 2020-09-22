@@ -1,10 +1,10 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 import time
 
 
-class CartServices(Page_Internship):
+class CartServices(PageServices):
     CART_ICON = (By.CSS_SELECTOR, "span.cart-icon.image-icon")
     CART_TOOLTIP = (By.CSS_SELECTOR, "li.html.widget_shopping_cart")
     SUBTOTAL_CART = (By.CSS_SELECTOR, "span.woocommerce-Price-amount.amount")

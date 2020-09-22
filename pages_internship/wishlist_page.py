@@ -1,9 +1,9 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 
-class WishlistServices(Page_Internship):
-    #print(f'in WishlistServices(Page_Internship)')
+class WishlistServices(PageServices):
+    #print(f'in WishlistServices(PageServices)')
 
     WISHLIST_ICON = (By.CSS_SELECTOR, "div.wishlist-icon")
     CURRENT_PAGE = (By.CSS_SELECTOR, "h2")

@@ -3,11 +3,11 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 import time
 
 
-class TopNavMenu_Internship(Page_Internship):
+class TopNavMenuServices(PageServices):
     LOGO_SUBMIT = (By.XPATH, "//a[@rel='home']")
     CURRENT_PAGE = (By.XPATH, "//a[@title='gettop.us - Just another WordPress site']")
     SELECT_TOP_NAV_ITEM = (By.CSS_SELECTOR, "ul.header-nav.header-nav-main.nav.nav-left.nav-uppercase a.nav-top-link")

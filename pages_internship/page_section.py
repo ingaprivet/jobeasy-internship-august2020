@@ -3,12 +3,12 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 from selenium.webdriver.common.by import By
 import time
 
 
-class PageSection(Page_Internship):
+class PageSectionServices(PageServices):
     BROWSE_CAT_TEXT = (By.XPATH, "//span[contains(text(),'Browse our Categories')]")
     LATEST_SALE_TEXT = (By.XPATH, "//span[contains(text(),'Latest products on sale')]")
     BEST_SELLING_FOOTER = (By.XPATH, "//span[contains(text(),'Best Selling')]")

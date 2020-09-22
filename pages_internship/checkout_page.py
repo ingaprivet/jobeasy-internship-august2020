@@ -2,14 +2,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import Select
 import time
 
 
-class CheckoutServices(Page_Internship):
-    # print(f'in CheckoutServices(Page_Internship)')
+class CheckoutServices(PageServices):
+    # print(f'in CheckoutServices(PageServices)')
 
     CART_ICON = (By.CSS_SELECTOR, ".cart-icon.image-icon")
     PLACE_ORDER_BUTTON = (By.ID, "place_order")

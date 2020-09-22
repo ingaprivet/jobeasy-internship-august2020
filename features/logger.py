@@ -9,7 +9,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 logger.info('foo bar')
 
-handler = logging.FileHandler('./ test_automation_internship.log')
+handler = logging.FileHandler('./jobeasy-internship-august2020/test_automation.log')
 # handler = logging.StreamHandler() #= will print all messages to the terminal
 handler.setLevel(logging.DEBUG)
 

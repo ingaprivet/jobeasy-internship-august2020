@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
-from pages_internship.base_page import Page_Internship
+from pages_internship.base_page import PageServices
 import time
 
 
-class SearchResultsInternship(Page_Internship):
-    #print(f'in SearchResultsInternship(Page_Internship)')
+class SearchResultServices(PageServices):
+    #print(f'in SearchResultServices(PageServices)')
 
     RESULTS_FOUND_MESSAGE = (By.XPATH, "//input[contains(@value, 'Watch Series 5')]")
     RESULTS_NOT_FOUND_MESSAGE = (By.XPATH, "//p[contains(text(),'No products were found matching your selection.')]")
